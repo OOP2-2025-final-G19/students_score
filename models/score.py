@@ -1,7 +1,7 @@
 from peewee import Model, ForeignKeyField, DateTimeField
 from .db import db
 from .user import User
-from .product import Product
+from .subject import Subject
 
 class Score(Model):
     user = ForeignKeyField(User, backref='scores')
