@@ -25,7 +25,7 @@ def add():
 
 @subject_bp.route('/edit/<int:subject_id>', methods=['GET', 'POST'])
 def edit(subject_id):
-    subject = subject.get_or_none(subject.id == subject_id)
+    subject = Subject.get_or_none(Subject.id == subject_id)
     if not subject:
         return redirect(url_for('subject.list'))
 
