@@ -9,7 +9,7 @@
     <h1>新しい注文を追加</h1>
     <ul class="breadcrumb">
         <li><a href="{{ url_for('index') }}">HOME</a></li>
-        <li><a href="{{ url_for('order.list') }}">注文一覧</a></li>
+        <li><a href="{{ url_for('order.list') }}">成績一覧</a></li>
         <li>新規注文</li>
     </ul>
     
@@ -21,10 +21,10 @@
                 {% endfor %}
             </select>
         </label><br>
-        <label>製品: 
-            <select name="product_id" required>
-                {% for product in products %}
-                    <option value="{{ product.id }}">{{ product.name }}</option>
+        <label>成績: 
+            <select name="subject_id" required>
+                {% for subject in subjects %}
+                    <option value="{{ subject.id }}">{{ subject.name }}</option>
                 {% endfor %}
             </select>
         </label><br>
