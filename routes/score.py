@@ -34,7 +34,7 @@ def edit(score_id):
 
     if request.method == 'POST':
         score.user = request.form['user_id']
-        score.product = request.form['subject_id']
+        score.subject = request.form['subject_id']
         score.save()
         return redirect(url_for('score.list'))
 
