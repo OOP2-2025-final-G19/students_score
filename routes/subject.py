@@ -17,8 +17,7 @@ def add():
     # POSTで送られてきたデータは登録
     if request.method == 'POST':
         name = request.form['name']
-        price = request.form['price']
-        Subject.create(name=name, price=price)
+        Subject.create(name=name)
         return redirect(url_for('subject.list'))
     
     return render_template('subject_add.html')
@@ -32,7 +31,6 @@ def edit(subject_id):
 
     if request.method == 'POST':
         subject.name = request.form['name']
-        subject.price = request.form['price']
         subject.save()
         return redirect(url_for('subject.list'))
 
