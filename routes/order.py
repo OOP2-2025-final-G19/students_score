@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for
 from models import Order, User, Product
 from datetime import datetime
 
-# Blueprintの作成
+# Blueprintの作成 a
 order_bp = Blueprint('order', __name__, url_prefix='/orders')
 
 
