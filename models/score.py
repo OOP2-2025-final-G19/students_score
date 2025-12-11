@@ -5,7 +5,7 @@ from .subject import Subject
 
 class Score(Model):
     user = ForeignKeyField(User, backref='scores')
-    product = ForeignKeyField(Product, backref='scores')
+    subject = ForeignKeyField(Subject, backref='scores')
     score_date = DateTimeField()
 
     class Meta:
