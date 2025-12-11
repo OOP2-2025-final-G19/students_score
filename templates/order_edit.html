@@ -22,9 +22,9 @@
             </select>
         </label><br>
         <label>製品: 
-            <select name="product_id" required>
-                {% for product in products %}
-                    <option value="{{ product.id }}" {% if order.product.id == product.id %}selected{% endif %}>{{ product.name }}</option>
+            <select name="subject_id" required>
+                {% for subject in subjects %}
+                    <option value="{{ subject.id }}" {% if order.subject.id == subject.id %}selected{% endif %}>{{ subject.name }}</option>
                 {% endfor %}
             </select>
         </label><br>
