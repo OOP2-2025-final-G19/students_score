@@ -28,7 +28,7 @@ def add():
 
 @score_bp.route('/edit/<int:score_id>', methods=['GET', 'POST'])
 def edit(score_id):
-    score = Score.get_or_none(score.id == score_id)
+    score = Score.get_or_none(Score.id == score_id)
     if not score:
         return redirect(url_for('score.list'))
 
