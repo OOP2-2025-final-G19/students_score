@@ -9,7 +9,7 @@ score_bp = Blueprint('score', __name__, url_prefix='/scores')
 @score_bp.route('/')
 def list():
     scores = Score.select()
-    return render_template('score_list.html', title='注文一覧', items=scores)
+    return render_template('score_list.html', title='成績一覧', items=scores)
 
 
 @score_bp.route('/add', methods=['GET', 'POST'])
@@ -17,8 +17,9 @@ def add():
     if request.method == 'POST':
         user_id = request.form['user_id']
         subject_id = request.form['subject_id']
-        score_date = datetime.now()
-        Score.create(user=user_id, subject=subject_id, score_date=score_date)
+        value = int(request.form['value'])
+        month = int(request.form['month'])
+        Score.create(user=user_id, subject=subject_id, value=value, month=month)
         return redirect(url_for('score.list'))
     
     users = User.select()
@@ -35,9 +36,11 @@ def edit(score_id):
     if request.method == 'POST':
         score.user = request.form['user_id']
         score.subject = request.form['subject_id']
+        score.value = int(request.form['value'])
+        score.month = int(request.form['month'])
         score.save()
         return redirect(url_for('score.list'))
 
     users = User.select()
     subjects = Subject.select()
-    return render_template('score_edit.html', score=score, users=users, subjects=subjects)
+    return render_template('score_edit.html', users=users, subjects=subjects, score=score)
