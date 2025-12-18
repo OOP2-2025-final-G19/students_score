@@ -1,0 +1,34 @@
+<!-- templates/partials/histogram.html -->
+
+<h2>科目別 成績ヒストグラム</h2>
+
+{% for subject, data in histograms.items() %}
+<h3>{{ subject }}</h3>
+<canvas id="chart-{{ loop.index }}"></canvas>
+
+<script>
+    const ctx{{ loop.index }} = document
+        .getElementById('chart-{{ loop.index }}')
+        .getContext('2d');
+
+    new Chart(ctx{{ loop.index }}, {
+        type: 'bar',
+        data: {
+            labels: {{ labels | tojson }},
+        datasets: [{
+            label: '{{ subject }}',
+            data: {{ data | tojson }},
+        borderWidth: 1
+        }]
+      },
+        options: {
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: { stepSize: 1 }
+            }
+        }
+    }
+    });
+</script>
+{% endfor %}
