@@ -44,3 +44,37 @@ def edit(score_id):
     users = User.select()
     subjects = Subject.select()
     return render_template('score_edit.html', users=users, subjects=subjects, score=score)
+
+# routes/score.py 等
+@score_bp.route('/graph')
+def show_graph():
+    from peewee import fn
+    # 月別・科目別の平均点を取得
+    stats = (Score
+             .select(Subject.name.alias('sub_name'), Score.month, fn.AVG(Score.value).alias('avg'))
+             .join(Subject)
+             .group_by(Subject.name, Score.month)
+             .order_by(Score.month))
+
+    # 1月〜12月のラベルを用意
+    labels = [f"{m}月" for m in range(1, 13)]
+    
+    # 科目ごとのデータリストを初期化
+    datasets_raw = {
+        "国語": [0] * 12,
+        "数学": [0] * 12,
+        "英語": [0] * 12
+    }
+
+    # 取得したデータを各科目のリストに振り分ける
+    for s in stats:
+        if s.sub_name in datasets_raw:
+            datasets_raw[s.sub_name][s.month - 1] = float(s.avg)
+
+    # テンプレートへ渡す変数を作成
+    graph_data = {
+        "labels": labels,
+        "datasets": datasets_raw
+    }
+
+    return render_template('score_graph.html', graph_data=graph_data)

@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <title>成績管理システム</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='base-style.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -15,6 +16,7 @@
     <li><a href="{{ url_for('score.list') }}">成績</a></li>
   </ul>
   {% include 'partials/histogram.html' %}
+  {% include 'partials/linegraph.html' %}
 </body>
 
 </html>
